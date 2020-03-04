@@ -1,0 +1,41 @@
+.clicked {
+  opacity: 1 !important;
+}
+
+.checkbox {
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  opacity: 0.5;
+
+  h2 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.2em;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  > input {
+    height: 15px;
+    width: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border-radius: 2px;
+    outline: none;
+    background-color: #aaaaaa;
+    border: none;
+    cursor: pointer;
+
+    margin-right: 1em;
+    &:checked {
+      background-color: #d51007;
+    }
+  }
+}

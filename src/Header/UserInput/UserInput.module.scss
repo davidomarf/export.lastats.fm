@@ -1,0 +1,39 @@
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+
+.user-input {
+  input,
+  button {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    height: 40px;
+    padding: 0.2em 1em;
+    border: none;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+    margin: 0.5em;
+
+    border-radius: 4px;
+
+    background: #fff;
+  }
+
+  input {
+    border: #e5e5e5 solid 2px;
+  }
+
+  button {
+    border: #d51007 solid 2px;
+    color: #d51007;
+  }
+}
