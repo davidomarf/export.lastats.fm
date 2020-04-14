@@ -1,4 +1,8 @@
-.configuration { 
-    display: flex;
-    flex-direction: column;
+.configuration {
+  display: flex;
+  flex-direction: column;
+
+  .box-form {
+    border-left: 1px solid red;
+  }
 }

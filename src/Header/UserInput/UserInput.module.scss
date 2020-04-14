@@ -15,7 +15,7 @@ button:focus {
     padding: 0.2em 1em;
     border: none;
 
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -26,10 +26,13 @@ button:focus {
     border-radius: 4px;
 
     background: #fff;
+
+    cursor: pointer;
   }
 
   input {
     border: #e5e5e5 solid 2px;
+    cursor: text;
   }
 
   button {

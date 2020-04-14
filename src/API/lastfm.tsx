@@ -1,11 +1,10 @@
-const axios = require("axios");
+import axios from 'axios';
 
 const lastFmAPI = process.env.REACT_APP_LAST_FM_API;
 const lastFmCall =
-  "https://ws.audioscrobbler.com/2.0/?format=json&api_key=" + lastFmAPI;
+  'https://ws.audioscrobbler.com/2.0/?format=json&api_key=' + lastFmAPI;
 
-
-async function getData(url) {
+async function getData(url: string) {
   try {
     const response = await axios.get(url);
     return response.data;
@@ -21,24 +20,23 @@ async function getData(url) {
  * @param {string} user Last.fm user
  * @returns {Promise} Response to the method https://www.last.fm/api/show/user.getInfo
  */
-function getUserPlayCount(user) {
-  let playCount = getData(lastFmCall + "&method=user.getinfo&user=" + user);
-  return playCount;
+function getUserPlayCount(user: string) {
+  return getData(lastFmCall + '&method=user.getinfo&user=' + user);
 }
 
 /**
  * Returns the specified page from the user's scrobble list. Each page has 200 entries.
- * @param {string} user 
+ * @param {string} user
  * @param {number} page Page of the
  * @returns {Promise} Response to the method https://www.last.fm/api/show/user.getRecentTracks
  */
-function getScrobbles(user, page) {
+function getScrobbles(user: string, page: number) {
   return getData(
-    `${lastFmCall}&method=user.getrecenttracks&limit=200&user=${user}&page=${page}`
+    `${lastFmCall}&method=user.getrecenttracks&limit=200&user=${user}&page=${page}`,
   );
 }
 
 module.exports = {
   getScrobbles,
-  getUserPlayCount
+  getUserPlayCount,
 };
