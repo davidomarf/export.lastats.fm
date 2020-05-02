@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 
-import styles from './Configuration.module.scss';
+import styles from "./Configuration.module.scss";
 
-import Period from './Period';
-import Cleaning from './Cleaning';
-import Files from './Files';
-import { Options } from './Types';
+import Period from "./Period";
+import Cleaning from "./Cleaning";
+import Files from "./Files";
+import { Options } from "./Types";
 
-const Configuration = () => {
+type ConfigurationProps = {
+  setConfig: Function;
+};
+
+const Configuration = ({ setConfig }: ConfigurationProps) => {
   const defaultConfiguration: Options = {
-    cleanData: { duplicatedScrobbles: true },
+    cleanData: { duplicatedScrobbles: true }
   };
 
-  const [config, setConfig] = useState(defaultConfiguration as Options);
+  // const [config, setConfig] = useState(defaultConfiguration as Options);
 
   const updateConfig = (options: Options) => {
-    setConfig({ ...config, ...options });
+    // setConfig({ ...config, ...options });
   };
 
-  useEffect(() => {
-    console.log(config);
-  });
-
   return (
-    <div className={styles['configuration']}>
+    <div className={styles["configuration"]}>
+      <p>Now you'll configure how you want your data to be downloaded.</p>
+      <p>
+        Leave the fields empty if you want to use the default configuration.
+      </p>
       <Period updateConfig={updateConfig} />
       <Cleaning updateConfig={updateConfig} />
       <Files updateConfig={updateConfig} />

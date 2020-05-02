@@ -1,27 +1,29 @@
-import axios from 'axios';
+import axios from "axios";
+import { User, RecentTracks, Track } from "../types";
 
 const lastFmAPI = process.env.REACT_APP_LAST_FM_API;
 const lastFmCall =
-  'https://ws.audioscrobbler.com/2.0/?format=json&api_key=' + lastFmAPI;
+  "https://ws.audioscrobbler.com/2.0/?format=json&api_key=" + lastFmAPI;
 
-async function getData(url: string) {
+async function getData<T>(url: string): Promise<T> {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get<T>(url);
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
-// Exported functions used in UserPage
-
 /**
- * Returns the number of scrobbles the user has
- * @param {string} user Last.fm user
- * @returns {Promise} Response to the method https://www.last.fm/api/show/user.getInfo
+ * Returns the information of a Last.fm user
+ *
+ * @param  user Last.fm user
+ * @returns Response to the method https://www.last.fm/api/show/user.getInfo
  */
-function getUserPlayCount(user: string) {
-  return getData(lastFmCall + '&method=user.getinfo&user=' + user);
+export async function getUserInfo(user: string): Promise<User> {
+  return ((await getData<User>(
+    lastFmCall + "&method=user.getinfo&user=" + user
+  )) as any).user;
 }
 
 /**
@@ -30,13 +32,12 @@ function getUserPlayCount(user: string) {
  * @param {number} page Page of the
  * @returns {Promise} Response to the method https://www.last.fm/api/show/user.getRecentTracks
  */
-function getScrobbles(user: string, page: number) {
-  return getData(
-    `${lastFmCall}&method=user.getrecenttracks&limit=200&user=${user}&page=${page}`,
-  );
+export async function getScrobbles(
+  user: string,
+  page: number,
+  limit: number = 200
+): Promise<Track[]> {
+  return ((await getData<RecentTracks>(
+    `${lastFmCall}&method=user.getrecenttracks&limit=${limit}&user=${user}&page=${page}`
+  )) as RecentTracks).recenttracks.track;
 }
-
-module.exports = {
-  getScrobbles,
-  getUserPlayCount,
-};

@@ -1,14 +1,14 @@
-import React from 'react';
-import cx from 'classnames';
-import styles from './Title.module.scss';
+import React from "react";
+import cx from "classnames";
+import styles from "./Title.module.scss";
 
-const Title = (props: {
+type TitleProps = {
   title: string;
   onClick: () => void;
   clicked?: boolean;
-}) => {
-  const { title, clicked, onClick } = props;
+};
 
+const Title = ({ title, clicked, onClick }: TitleProps) => {
   return (
     <>
       <div

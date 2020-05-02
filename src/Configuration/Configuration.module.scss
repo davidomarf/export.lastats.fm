@@ -1,8 +1,42 @@
 .configuration {
+  padding: 1rem;
+
   display: flex;
   flex-direction: column;
-
+  max-width: 400px;
+  margin: auto;
   .box-form {
-    border-left: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-left: 10px;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(red, 0.25);
   }
+
+  .period-input {
+    input {
+      min-width: fit-content;
+
+      border: none;
+      padding: 0 1em;
+      background: none;
+    }
+  }
+
+  .input-field {
+    margin: 0.5em 0;
+    padding: 0.5em 1em 0.5em;
+
+    display: flex;
+    align-items: flex-start;
+
+    background-color: whitesmoke;
+    border-radius: 5px;
+  }
+}
+
+p {
+  text-align: center;
 }

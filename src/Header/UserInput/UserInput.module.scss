@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 input:focus,
 textarea:focus,
 select:focus,
@@ -15,7 +17,6 @@ button:focus {
     padding: 0.2em 1em;
     border: none;
 
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -31,12 +32,20 @@ button:focus {
   }
 
   input {
-    border: #e5e5e5 solid 2px;
+    border: $gray solid 2px;
     cursor: text;
   }
 
   button {
-    border: #d51007 solid 2px;
-    color: #d51007;
+    border: $accent-color solid 2px;
+    color: $accent-color;
+    &:disabled {
+      border-color: $gray;
+      color: $gray;
+    }
+    &:hover {
+      background-color: $accent-color;
+      color: $gray;
+    }
   }
 }
