@@ -17,6 +17,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
+    "swr": "^0.2.3",
     "typescript": "^3.9.7",
     "webfontloader": "^1.6.28"
   },
