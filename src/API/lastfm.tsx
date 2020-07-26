@@ -1,36 +1,42 @@
-import axios from "axios";
-import { User, RecentTracks, Track } from "../types";
+import useSWR from "swr";
+import { User, RecentTracks } from "../types";
 
 const lastFmAPI = process.env.REACT_APP_LAST_FM_API;
-const lastFmCall =
+const baseURL =
   "https://ws.audioscrobbler.com/2.0/?format=json&api_key=" + lastFmAPI;
 
 export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 /**
- * Returns the information of a Last.fm user
+ * Throw a request to the API to obtain its information
  *
- * @param  user Last.fm user
- * @returns Response to the method https://www.last.fm/api/show/user.getInfo
+ * @param user Valid username
  */
-export async function getUserInfo(user: string): Promise<User> {
-  return ((await getData<User>(
-    lastFmCall + "&method=user.getinfo&user=" + user
-  )) as any).user;
+export function useUserInfo(user: string) {
+  const path = `${baseURL}&method=user.getinfo&user=${user}`;
+  const { data, error } = useSWR<{ user: User }>(path);
+
+  return {
+    userData: data?.user || ({} as User),
+    isLoadingUser: !data && !error,
+    isErrorUser: error
+  };
 }
 
 /**
- * Returns the specified page from the user's scrobble list. Each page has 200 entries.
- * @param {string} user
- * @param {number} page Page of the
- * @returns {Promise} Response to the method https://www.last.fm/api/show/user.getRecentTracks
+ * Request a specific page of the recent tracks list
+ *
+ * @param user Valid username
+ * @param page Page to request
+ * @param limit Scrobbles per page
  */
-export async function getScrobbles(
-  user: string,
-  page: number,
-  limit: number = 200
-): Promise<Track[]> {
-  return ((await getData<RecentTracks>(
-    `${lastFmCall}&method=user.getrecenttracks&limit=${limit}&user=${user}&page=${page}`
-  )) as RecentTracks).recenttracks.track;
+export function useScrobbles(user: string, page: number, limit: number = 200) {
+  const path = `${baseURL}&method=user.getrecenttracks&limit=${limit}&user=${user}&page=${page}`;
+  const { data, error } = useSWR<RecentTracks>(path);
+
+  return {
+    scrobblesData: data?.recenttracks?.track || [],
+    isLoadingScrobbles: !data && !error,
+    isErrorScrobbles: error
+  };
 }

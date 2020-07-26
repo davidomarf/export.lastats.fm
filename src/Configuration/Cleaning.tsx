@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 
 import Title from "./Title";
 
@@ -11,10 +11,6 @@ type CleaningProps = {
 
 const Cleaning = ({ updateConfig }: CleaningProps) => {
   const [clicked, setClicked] = useState(false);
-
-  const handleSelections = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  };
 
   return (
     <>

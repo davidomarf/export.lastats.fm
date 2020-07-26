@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 
 import styles from "./Configuration.module.scss";
 
@@ -12,15 +12,12 @@ type ConfigurationProps = {
 };
 
 const Configuration = ({ setConfig }: ConfigurationProps) => {
-  const defaultConfiguration: Options = {
-    cleanData: { duplicatedScrobbles: true }
-  };
-
-  // const [config, setConfig] = useState(defaultConfiguration as Options);
-
-  const updateConfig = (options: Options) => {
-    // setConfig({ ...config, ...options });
-  };
+  const updateConfig = useCallback(
+    (options: Options) => {
+      setConfig((e: Options) => ({ ...e, ...options }));
+    },
+    [setConfig]
+  );
 
   return (
     <div className={styles["configuration"]}>
