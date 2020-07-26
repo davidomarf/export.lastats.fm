@@ -5,14 +5,7 @@ const lastFmAPI = process.env.REACT_APP_LAST_FM_API;
 const lastFmCall =
   "https://ws.audioscrobbler.com/2.0/?format=json&api_key=" + lastFmAPI;
 
-async function getData<T>(url: string): Promise<T> {
-  try {
-    const response = await axios.get<T>(url);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-}
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 /**
  * Returns the information of a Last.fm user
