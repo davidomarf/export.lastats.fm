@@ -1,0 +1,29 @@
+.export {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($color: #F5F5F5, $alpha: 1.0);
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border: none;
+    transition: background .2s ease-in-out;
+
+    a {
+        text-decoration: none;
+        border: none;
+        background-color: transparent;
+        font-family: inherit;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        color: #000;
+        font-weight: bold;
+
+    }
+
+    &:hover {
+        background-color: rgba($color: #A6A6A6, $alpha: 0.3);
+    }
+}

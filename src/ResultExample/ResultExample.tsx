@@ -16,10 +16,10 @@ const ResultExample = ({ tracks }: ResultExampleProps) => {
           name,artist,album,uts
           <br />
           {tracks.map((e: Track) => (
-            <>
+            <div key={e.url}>
               "{e.name}","{e.artist["#text"]}","{e.album["#text"]}",{e.date.uts}
               <br />
-            </>
+            </div>
           ))}
         </code>
       </pre>

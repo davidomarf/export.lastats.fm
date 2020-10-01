@@ -6,6 +6,7 @@ import Configuration from "./Configuration/Configuration";
 import UserInfo from "./UserInfo/UserInfo";
 import { Track } from "./types";
 import ResultExample from "./ResultExample/ResultExample";
+import ExportCSV from "./ExportCSV/ExportCSV";
 
 type Config = {
   name: null | string;
@@ -29,6 +30,9 @@ const App = () => {
       )}
       {isValidUser && <Configuration setConfig={setConfig} />}
       {isValidUser && <ResultExample tracks={firstPage} />}
+      {isValidUser && (
+        <ExportCSV fileTitle="Mi_archivazo" userTracks={firstPage} />
+      )}
       {config && <div>{config.name}</div>}
     </div>
   );
