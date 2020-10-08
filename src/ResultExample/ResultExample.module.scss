@@ -4,3 +4,15 @@ pre {
   overflow-x: scroll;
   line-height: 2em;
 }
+
+div.header {
+  display: flex;
+  align-items: center;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  button {
+    margin-left: auto;
+  }
+}
