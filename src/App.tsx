@@ -8,6 +8,7 @@ import UserInfo from "./UserInfo/UserInfo";
 const App = () => {
   const [user, setUser] = useState("");
   const [firstPage, setFirstPage] = useState<Track[]>([]);
+  const [totalCSV, setTotalCSV] = useState<Track[]>([]);
   const [isValidUser, setIsValidUser] = useState(false);
 
   return (
@@ -18,9 +19,10 @@ const App = () => {
           user={user}
           setIsValidUser={setIsValidUser}
           setFirstPage={setFirstPage}
+          setTotalCSV={setTotalCSV}
         />
       )}
-      {isValidUser && <ResultExample tracks={firstPage} />}
+      {isValidUser && <ResultExample tracks={firstPage} totalCSV={totalCSV} />}
     </div>
   );
 };
