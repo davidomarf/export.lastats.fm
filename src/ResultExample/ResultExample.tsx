@@ -1,19 +1,19 @@
 import React from "react";
-import { Track } from "../types";
-
-import styles from "./ResultExample.module.scss";
 import ExportCSV from "../ExportCSV/ExportCSV";
+import { Track } from "../types";
+import styles from "./ResultExample.module.scss";
 
 type ResultExampleProps = {
   tracks: Track[];
+  totalCSV: Track[];
 };
 
-const ResultExample = ({ tracks }: ResultExampleProps) => {
+const ResultExample = ({ tracks, totalCSV }: ResultExampleProps) => {
   return (
     <>
       <div className={styles.header}>
         Preview of your CSV file
-        <ExportCSV fileName="scrobbles.csv" userTracks={tracks} />
+        <ExportCSV fileName="scrobbles.csv" userTracks={totalCSV} />
       </div>
 
       <pre>

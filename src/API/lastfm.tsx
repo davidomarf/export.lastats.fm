@@ -1,9 +1,14 @@
-import axios from "axios";
-import { User, RecentTracks, Track } from "../types";
+import { default as axiosOriginal } from "axios";
+import rateLimit from "axios-rate-limit";
+import { RecentTracks, Track, User } from "../types";
 
 const lastFmAPI = process.env.REACT_APP_LAST_FM_API;
 const lastFmCall =
   "https://ws.audioscrobbler.com/2.0/?format=json&api_key=" + lastFmAPI;
+
+const axios = rateLimit(axiosOriginal.create(), {
+  maxRPS: 10,
+});
 
 async function getData<T>(url: string): Promise<T> {
   try {
@@ -21,9 +26,11 @@ async function getData<T>(url: string): Promise<T> {
  * @returns Response to the method https://www.last.fm/api/show/user.getInfo
  */
 export async function getUserInfo(user: string): Promise<User> {
-  return ((await getData<User>(
-    lastFmCall + "&method=user.getinfo&user=" + user
-  )) as any).user;
+  return (
+    (await getData<User>(
+      lastFmCall + "&method=user.getinfo&user=" + user
+    )) as any
+  ).user;
 }
 
 /**
@@ -37,7 +44,9 @@ export async function getScrobbles(
   page: number,
   limit: number = 200
 ): Promise<Track[]> {
-  return ((await getData<RecentTracks>(
-    `${lastFmCall}&method=user.getrecenttracks&limit=${limit}&user=${user}&page=${page}`
-  )) as RecentTracks).recenttracks.track;
+  return (
+    (await getData<RecentTracks>(
+      `${lastFmCall}&method=user.getrecenttracks&limit=${limit}&user=${user}&page=${page}`
+    )) as RecentTracks
+  ).recenttracks.track;
 }
